@@ -67,7 +67,7 @@ test('Add to Cart', async ({page}) =>
     
 
 
-  // await page.waitForTimeout(3000);
+
    
  
    
