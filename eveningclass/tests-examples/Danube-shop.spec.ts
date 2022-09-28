@@ -44,31 +44,24 @@ test('click on SIGN-UP', async ({page}) =>
 })
 test('Add to Cart', async ({page}) =>
 {
-    await page.locator('text=Haben oder haben').click();
-    await page.locator('text=add to cart').click();
-    await expect(page.locator('xpath=//*[@id="app-content"]/div/div/ul/li')).toContainText("1x, Haben oder haben, Fric Eromm, $9.95")
-   
-    await page.locator('text=Checkout').click();
-    await page.type('#s-name', "Saradha Mohan"); 
-    await page.type('[placeholder="Surname"]', "Saradha");
-    await page.waitForTimeout(1000);
-    await page.type('#s-address', "G-1,ABC Appartment,cantonment"); 
-    await page.waitForTimeout(2000);
-    await page.type('#s-zipcode',"620001");
-    await page.waitForTimeout(2000);
-    await page.type('#s-city',"Chennai");
-    await page.waitForTimeout(2000);
-    await page.type('[placeholder="Company (optional)"]',"SSR");
-    await page.waitForTimeout(1000);
-    await page.locator('#asap').check();
-    await page.waitForTimeout(2000);
-    //await page.locator('#billing-different').check();
-    await page.locator('xpath=//*[@id="app-content"]/div/div/button').click();
+      
+    await page.click('text=Haben oder haben');
+    await page.click('text=add to cart');
+    await expect(page.locator('xpath=//*[@id="app-content"]/div/div/ul/li')).toContainText("1x, Haben oder haben, Fric Eromm, $9.95");
+    await expect(page.locator('ul > li')).toBeNaN;
+    await page.click('text=Checkout');
+    await page.fill('#s-name', "Saradha Mohan"); 
+    await page.fill('[placeholder="Surname"]', "Saradha");
+    await page.fill('#s-address', "G-1,ABC Appartment,cantonment"); 
+    await page.fill('#s-zipcode',"620001");
+    await page.fill('#s-city',"Chennai");
+    await page.fill('[placeholder="Company (optional)"]',"SSR");
+    await page.check('#asap');
+    await page.click('xpath=//*[@id="app-content"]/div/div/button');
+    await expect(page.locator('#order-confirmation')).toHaveText('All good, order is on the way. Thank you!!');
 
 
    
-    //await page.type('[placeholder="Company (optional)]',"SSR");
-    //await page.waitForTimeout(2000);*/
 
 })
     
